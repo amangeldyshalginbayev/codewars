@@ -1,0 +1,11 @@
+# Rider/ReSharper user-specific settings
+.idea/
+.idea/*
+
+# User-specific settings for solution files
+*.sln.DotSettings.user
+
+# Build output
+bin/
+obj/
+out/
