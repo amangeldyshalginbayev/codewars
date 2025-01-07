@@ -71,4 +71,21 @@ public class Kata
         return Convert.ToString(sum, 2);
     }
     
+    /// <summary>
+    /// https://www.codewars.com/kata/517abf86da9663f1d2000003/train/csharp
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static string ToCamelCase(string str)
+    {
+        var words = str.Split('-', '_');
+        var word = string.Join("", words.Select((word, index) => index == 0 ? word : Capitalize(word)));
+        return word;
+    }
+
+    private static string Capitalize(string str)
+    {
+        return char.ToUpper(str[0]) + str[1..];
+    }
+    
 }
