@@ -43,4 +43,20 @@ public class Tests
         Assert.That(Kata.ToCamelCase("the_stealth_warrior"), Is.EqualTo("theStealthWarrior"), "Kata.ToCamelCase('the_stealth_warrior') did not return correct value");
         Assert.That(Kata.ToCamelCase("The-Stealth-Warrior"), Is.EqualTo("TheStealthWarrior"), "Kata.ToCamelCase('The-Stealth-Warrior') did not return correct value");
     }
+    
+    [Test]
+    public void TestSumOfMultiples3Or5()
+    {
+        AssertionForSumOfMultiples3Or5(expected : 23, input : 10);
+        AssertionForSumOfMultiples3Or5(expected : 78, input : 20);
+        AssertionForSumOfMultiples3Or5(expected : 9168, input : 200);
+        AssertionForSumOfMultiples3Or5(expected : 0, input : 0);
+    }
+  
+    private static void AssertionForSumOfMultiples3Or5(int expected, int input) =>
+        Assert.That(
+            Kata.SumOfMultiples3Or5(input),
+            Is.EqualTo(expected),
+            $"Incorrect answer for input={input}"
+        );
 }
