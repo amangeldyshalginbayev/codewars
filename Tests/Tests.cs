@@ -59,4 +59,34 @@ public class Tests
             Is.EqualTo(expected),
             $"Incorrect answer for input={input}"
         );
+    
+    private void TestGetReadableTime(int seconds, String expected)
+    {
+        String actual = Kata.GetReadableTime(seconds);
+        Assert.That(actual, Is.EqualTo(expected), "for " + seconds + " seconds");
+    }
+
+    [Test]
+    public void Tests4GetReadableTime()
+    {
+        TestGetReadableTime(     0, "00:00:00");
+        TestGetReadableTime(    59, "00:00:59");
+        TestGetReadableTime(    60, "00:01:00");
+        TestGetReadableTime(    90, "00:01:30");
+        TestGetReadableTime(  3599, "00:59:59");
+        TestGetReadableTime(  3600, "01:00:00");
+        TestGetReadableTime( 45296, "12:34:56");
+        TestGetReadableTime( 86399, "23:59:59");
+        TestGetReadableTime( 86400, "24:00:00");
+        TestGetReadableTime(359999, "99:59:59");
+    }
+    
+    [Test]
+    public void TestDuplicateEncode()
+    {
+        Assert.That(Kata.DuplicateEncode("din"), Is.EqualTo("((("));
+        Assert.That(Kata.DuplicateEncode("recede"), Is.EqualTo("()()()"));
+        Assert.That(Kata.DuplicateEncode("Success"), Is.EqualTo(")())())"), "should ignore case");
+        Assert.That(Kata.DuplicateEncode("(( @"), Is.EqualTo("))(("));
+    }
 }

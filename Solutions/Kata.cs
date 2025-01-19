@@ -113,4 +113,51 @@ public class Kata
 
         return sum;
     }
+    
+    /// <summary>
+    /// https://www.codewars.com/kata/52685f7382004e774f0001f7/train/csharp
+    /// </summary>
+    /// <param name="seconds"></param>
+    /// <returns></returns>
+    public static string GetReadableTime(int seconds)
+    {
+        var hours = seconds / 3600;
+        var minutes = seconds % 3600 / 60;
+        var secondsCount = seconds % 60;
+        
+        return $"{hours:D2}:{minutes:D2}:{secondsCount:D2}";
+        
+    }
+    
+    public static string DuplicateEncode(string word)
+    {
+        word = word.ToLower();
+        var charactersCount = new Dictionary<char, int>();
+        foreach (var c in word)
+        {
+            if (!charactersCount.ContainsKey(c))
+            {
+                charactersCount.Add(c, 1);
+            }
+            else
+            {
+                charactersCount[c] += 1;
+            }
+        }
+        
+        var builder = new StringBuilder(word.Length);
+        foreach (var character in word)
+        {
+            if (charactersCount[character] > 1)
+            {
+                builder.Append(')');
+            }
+            else
+            {
+                builder.Append('(');
+            }
+        }
+        
+        return builder.ToString();
+    }
 }
