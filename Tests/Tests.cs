@@ -13,7 +13,7 @@ public class Tests
     {
         return Kata.CreatePhoneNumber(numbers);
     }
-    
+
     private static IEnumerable<TestCaseData> TestCasesForNarcissistic
     {
         get
@@ -24,42 +24,43 @@ public class Tests
             yield return new TestCaseData(371)
                 .Returns(true)
                 .SetDescription("371 is narcissitic");
-        
         }
     }
-  
+
     [Test, TestCaseSource(nameof(TestCasesForNarcissistic))]
     public bool TestNarcissistic(int n) => Kata.Narcissistic(n);
-    
+
     [Test]
     public void TestGetVowelCount()
     {
         Assert.That(Kata.GetVowelCount("abracadabra"), Is.EqualTo(5), "Incorrect answer for str = \"abracadabra\"");
     }
-    
+
     [Test]
     public void TestToCamelCase()
     {
-        Assert.That(Kata.ToCamelCase("the_stealth_warrior"), Is.EqualTo("theStealthWarrior"), "Kata.ToCamelCase('the_stealth_warrior') did not return correct value");
-        Assert.That(Kata.ToCamelCase("The-Stealth-Warrior"), Is.EqualTo("TheStealthWarrior"), "Kata.ToCamelCase('The-Stealth-Warrior') did not return correct value");
+        Assert.That(Kata.ToCamelCase("the_stealth_warrior"), Is.EqualTo("theStealthWarrior"),
+            "Kata.ToCamelCase('the_stealth_warrior') did not return correct value");
+        Assert.That(Kata.ToCamelCase("The-Stealth-Warrior"), Is.EqualTo("TheStealthWarrior"),
+            "Kata.ToCamelCase('The-Stealth-Warrior') did not return correct value");
     }
-    
+
     [Test]
     public void TestSumOfMultiples3Or5()
     {
-        AssertionForSumOfMultiples3Or5(expected : 23, input : 10);
-        AssertionForSumOfMultiples3Or5(expected : 78, input : 20);
-        AssertionForSumOfMultiples3Or5(expected : 9168, input : 200);
-        AssertionForSumOfMultiples3Or5(expected : 0, input : 0);
+        AssertionForSumOfMultiples3Or5(expected: 23, input: 10);
+        AssertionForSumOfMultiples3Or5(expected: 78, input: 20);
+        AssertionForSumOfMultiples3Or5(expected: 9168, input: 200);
+        AssertionForSumOfMultiples3Or5(expected: 0, input: 0);
     }
-  
+
     private static void AssertionForSumOfMultiples3Or5(int expected, int input) =>
         Assert.That(
             Kata.SumOfMultiples3Or5(input),
             Is.EqualTo(expected),
             $"Incorrect answer for input={input}"
         );
-    
+
     private void TestGetReadableTime(int seconds, String expected)
     {
         String actual = Kata.GetReadableTime(seconds);
@@ -69,18 +70,18 @@ public class Tests
     [Test]
     public void Tests4GetReadableTime()
     {
-        TestGetReadableTime(     0, "00:00:00");
-        TestGetReadableTime(    59, "00:00:59");
-        TestGetReadableTime(    60, "00:01:00");
-        TestGetReadableTime(    90, "00:01:30");
-        TestGetReadableTime(  3599, "00:59:59");
-        TestGetReadableTime(  3600, "01:00:00");
-        TestGetReadableTime( 45296, "12:34:56");
-        TestGetReadableTime( 86399, "23:59:59");
-        TestGetReadableTime( 86400, "24:00:00");
+        TestGetReadableTime(0, "00:00:00");
+        TestGetReadableTime(59, "00:00:59");
+        TestGetReadableTime(60, "00:01:00");
+        TestGetReadableTime(90, "00:01:30");
+        TestGetReadableTime(3599, "00:59:59");
+        TestGetReadableTime(3600, "01:00:00");
+        TestGetReadableTime(45296, "12:34:56");
+        TestGetReadableTime(86399, "23:59:59");
+        TestGetReadableTime(86400, "24:00:00");
         TestGetReadableTime(359999, "99:59:59");
     }
-    
+
     [Test]
     public void TestDuplicateEncode()
     {
@@ -88,5 +89,15 @@ public class Tests
         Assert.That(Kata.DuplicateEncode("recede"), Is.EqualTo("()()()"));
         Assert.That(Kata.DuplicateEncode("Success"), Is.EqualTo(")())())"), "should ignore case");
         Assert.That(Kata.DuplicateEncode("(( @"), Is.EqualTo("))(("));
+    }
+    
+    [Test]
+    public void TestfindNb()
+    {
+        Assert.That(Kata.findNb(36), Is.EqualTo(3));
+        Assert.That(Kata.findNb(4183059834009), Is.EqualTo(2022));
+        Assert.That(Kata.findNb(24723578342962), Is.EqualTo(-1));
+        Assert.That(Kata.findNb(135440716410000), Is.EqualTo(4824));
+        Assert.That(Kata.findNb(40539911473216), Is.EqualTo(3568));
     }
 }

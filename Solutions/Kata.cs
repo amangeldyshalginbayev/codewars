@@ -160,4 +160,31 @@ public class Kata
         
         return builder.ToString();
     }
+    
+    /// <summary>
+    /// https://www.codewars.com/kata/5592e3bd57b64d00f3000047/train/csharp
+    /// </summary>
+    /// <param name="m"></param>
+    /// <returns></returns>
+    public static long findNb(long m) {
+        // your code
+        var sum = 0L;
+
+        for (var i = 1; ;i++)
+        {
+            sum += (long)Math.Pow(i, 3);
+            if (sum == m)
+            {
+                return i;
+            }
+
+            if (sum > m)
+            {
+                return -1;
+            }
+
+            // Console.WriteLine($"Current number is {i}");
+            // Console.WriteLine($"Current sum is {sum}");
+        }
+    }
 }
