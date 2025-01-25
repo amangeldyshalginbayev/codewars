@@ -100,4 +100,35 @@ public class Tests
         Assert.That(Kata.findNb(135440716410000), Is.EqualTo(4824));
         Assert.That(Kata.findNb(40539911473216), Is.EqualTo(3568));
     }
+    
+    [Test]
+    public void TestFindMissingLetter()
+    {
+        Assert.That(Kata.FindMissingLetter(new [] { 'a','b','c','d','f' }), Is.EqualTo('e'));
+        Assert.That(Kata.FindMissingLetter(new [] { 'O','Q','R','S' }), Is.EqualTo('P'));
+    }
+    
+    [Test]
+    public void TestMoveZeroes()
+    {
+        int[] expected = new int[] {1, 2, 1, 1, 3, 1, 0, 0, 0, 0};
+        Assert.That(Kata.MoveZeroes(new int[] {1, 2, 0, 1, 0, 1, 0, 3, 0, 1}), Is.EqualTo(expected));
+    }
+    
+    [Test]
+    public void TestMoveZeroesInPlace()
+    {
+        int[] expected = new int[] {1, 2, 1, 1, 3, 1, 0, 0, 0, 0};
+        Assert.That(Kata.MoveZeroesInPlace(new int[] {1, 2, 0, 1, 0, 1, 0, 3, 0, 1}), Is.EqualTo(expected));
+    }
+    
+    [Test, Description("It should return correct text")]
+    public void TestLikes()
+    {
+        Assert.That(Kata.Likes(new string[0]), Is.EqualTo("no one likes this"));
+        Assert.That(Kata.Likes(new string[] {"Peter"}), Is.EqualTo("Peter likes this"));
+        Assert.That(Kata.Likes(new string[] {"Jacob", "Alex"}), Is.EqualTo("Jacob and Alex like this"));
+        Assert.That(Kata.Likes(new string[] {"Max", "John", "Mark"}), Is.EqualTo("Max, John and Mark like this"));
+        Assert.That(Kata.Likes(new string[] {"Alex", "Jacob", "Mark", "Max"}), Is.EqualTo("Alex, Jacob and 2 others like this"));
+    }
 }

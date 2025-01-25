@@ -113,7 +113,7 @@ public class Kata
 
         return sum;
     }
-    
+
     /// <summary>
     /// https://www.codewars.com/kata/52685f7382004e774f0001f7/train/csharp
     /// </summary>
@@ -124,11 +124,10 @@ public class Kata
         var hours = seconds / 3600;
         var minutes = seconds % 3600 / 60;
         var secondsCount = seconds % 60;
-        
+
         return $"{hours:D2}:{minutes:D2}:{secondsCount:D2}";
-        
     }
-    
+
     public static string DuplicateEncode(string word)
     {
         word = word.ToLower();
@@ -144,7 +143,7 @@ public class Kata
                 charactersCount[c] += 1;
             }
         }
-        
+
         var builder = new StringBuilder(word.Length);
         foreach (var character in word)
         {
@@ -157,20 +156,21 @@ public class Kata
                 builder.Append('(');
             }
         }
-        
+
         return builder.ToString();
     }
-    
+
     /// <summary>
     /// https://www.codewars.com/kata/5592e3bd57b64d00f3000047/train/csharp
     /// </summary>
     /// <param name="m"></param>
     /// <returns></returns>
-    public static long findNb(long m) {
+    public static long findNb(long m)
+    {
         // your code
         var sum = 0L;
 
-        for (var i = 1; ;i++)
+        for (var i = 1;; i++)
         {
             sum += (long)Math.Pow(i, 3);
             if (sum == m)
@@ -186,5 +186,71 @@ public class Kata
             // Console.WriteLine($"Current number is {i}");
             // Console.WriteLine($"Current sum is {sum}");
         }
+    }
+
+    /// <summary>
+    /// https://www.codewars.com/kata/5839edaa6754d6fec10000a2/train/csharp
+    /// </summary>
+    /// <param name="array"></param>
+    /// <returns></returns>
+    public static char FindMissingLetter(char[] array)
+    {
+        for (var i = 1; i < array.Length; i++)
+        {
+            if (array[i] - array[i-1] > 1)
+            {
+                return (char)(array[i] - 1);
+            }
+        }
+        return ' ';
+    }
+
+    public static int[] MoveZeroes(int[] arr)
+    {
+        var numbers = arr.Where(number => number != 0).ToList();
+
+        numbers.AddRange(Enumerable.Repeat(0, arr.Length - numbers.Count));
+
+        return numbers.ToArray();
+    }
+
+    /// <summary>
+    /// https://www.codewars.com/kata/5839edaa6754d6fec10000a2/train/csharp
+    /// In place solution without extra memory allocation, its fast and efficient than the previous solution, also involves algorithm design
+    /// </summary>
+    /// <param name="arr"></param>
+    /// <returns></returns>
+    public static int[] MoveZeroesInPlace(int[] arr)
+    {
+        int nonZeroIndex = 0; // Index to place the next non-zero element.
+
+        // Move all non-zero elements to the front of the array.
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr[i] != 0)
+            {
+                arr[nonZeroIndex] = arr[i];
+                nonZeroIndex++;
+            }
+        }
+
+        // Fill the rest of the array with zeroes.
+        for (int i = nonZeroIndex; i < arr.Length; i++)
+        {
+            arr[i] = 0;
+        }
+
+        return arr;
+    }
+    
+    /// <summary>
+    /// https://www.codewars.com/kata/5266876b8f4bf2da9b000362/train/csharp
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public static string Likes(string[] name)
+    {
+        throw new NotImplementedException();
     }
 }
