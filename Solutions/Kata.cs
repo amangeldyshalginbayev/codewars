@@ -251,6 +251,54 @@ public class Kata
     /// <exception cref="NotImplementedException"></exception>
     public static string Likes(string[] name)
     {
-        throw new NotImplementedException();
+        var phrase = name switch
+        {
+            null or { Length: 0 } => "no one likes this",
+            { Length: 1 } => $"{name[0]} likes this",
+            { Length: 2 } => $"{name[0]} and {name[1]} like this",
+            { Length: 3 } => $"{name[0]}, {name[1]} and {name[2]} like this",
+            _ => $"{name[0]}, {name[1]} and {name.Length - 2} others like this"
+        };
+
+        return phrase;
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    public static string Rot13(string message)
+    {
+        if (string.IsNullOrEmpty(message))
+        {
+            return string.Empty;
+        }
+
+        return string.Concat(message.Select(c =>
+        {
+            if (char.IsLetter(c))
+            {
+                if (char.IsUpper(c))
+                {
+                    return (char)((c - 'A' + 13) % 26 + 'A');
+                }
+                else
+                {
+                    return (char)((c - 'a' + 13) % 26 + 'a');
+                }
+            }
+            return c;
+        }));
+    }
+
+    /// <summary>
+    /// https://www.codewars.com/kata/534d2f5b5371ecf8d2000a08/train/csharp
+    /// </summary>
+    /// <param name="size"></param>
+    /// <returns></returns>
+    public static int[,] MultiplicationTable(int size)
+    {
+        return null; //your table
     }
 }

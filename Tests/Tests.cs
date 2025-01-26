@@ -131,4 +131,23 @@ public class Tests
         Assert.That(Kata.Likes(new string[] {"Max", "John", "Mark"}), Is.EqualTo("Max, John and Mark like this"));
         Assert.That(Kata.Likes(new string[] {"Alex", "Jacob", "Mark", "Max"}), Is.EqualTo("Alex, Jacob and 2 others like this"));
     }
+    
+    [Test]
+    public void TestRot13()
+    {
+        var actualOutput = Kata.Rot13("test");
+        Assert.That(actualOutput, Is.EqualTo("grfg"), String.Format("Input: test, Expected Output: grfg, Actual Output: {0}", actualOutput));
+        
+        actualOutput = Kata.Rot13("Test");
+        Assert.That(actualOutput, Is.EqualTo("Grfg"), String.Format("Input: Test, Expected Output: Grfg, Actual Output: {0}", actualOutput));
+    }
+    
+    [Test]
+    public void MyTest()
+    {
+        int[,] expected = new int[,]{{1,2,3},{2,4,6},{3,6,9}};
+        Assert.That(Kata.MultiplicationTable(3), Is.EqualTo(expected));
+    }
+    
+    
 }
