@@ -143,11 +143,31 @@ public class Tests
     }
     
     [Test]
-    public void MyTest()
+    public void TestMultiplicationTable()
     {
         int[,] expected = new int[,]{{1,2,3},{2,4,6},{3,6,9}};
         Assert.That(Kata.MultiplicationTable(3), Is.EqualTo(expected));
     }
     
+    [Test]
+    public void TestStripComments()
+    {
+        Assert.That(Kata.StripComments("apples, pears # and bananas\ngrapes\nbananas !apples", new string[] { "#", "!" }),
+            Is.EqualTo("apples, pears\ngrapes\nbananas"));
+
+        Assert.That(Kata.StripComments("a #b\nc\nd $e f g", new string[] { "#", "$" }),
+            Is.EqualTo("a\nc\nd"));
+    }
     
+    [Test]
+    public void TestRangeExtraction()
+    {
+        Assert.That(Kata.Extract(new[] { 1, 2 }), Is.EqualTo("1,2"));
+        Assert.That(Kata.Extract(new[] { 1, 2, 3 }), Is.EqualTo("1-3"));
+
+        Assert.That(Kata.Extract(new[] { 1 }), Is.EqualTo("1"));
+
+        Assert.That(Kata.Extract(new[] { -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20 }), Is.EqualTo("-6,-3-1,3-5,7-11,14,15,17-20"));
+        Assert.That(Kata.Extract(new[] { -3, -2, -1, 2, 10, 15, 16, 18, 19, 20 }), Is.EqualTo("-3--1,2,10,15,16,18-20"));
+    }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Solutions;
 
@@ -299,6 +300,92 @@ public class Kata
     /// <returns></returns>
     public static int[,] MultiplicationTable(int size)
     {
-        return null; //your table
+        var table = new int[size, size];
+
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                table[i, j] = (i + 1) * (j + 1);
+            }
+        }
+
+        return table;
     }
+    
+    /// <summary>
+    /// https://www.codewars.com/kata/51c8e37cee245da6b40000bd/train/csharp
+    /// Got help from ChatGPT when solving this task, but thanks to it learned new things regarding regex
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="commentSymbols"></param>
+    /// <returns></returns>
+    public static string StripComments(string text, string[] commentSymbols)
+    {
+        // Create a regex pattern by escaping comment symbols and joining them with "|"
+        var pattern = string.Join("|", commentSymbols.Select(Regex.Escape));
+
+        // Process each line separately
+        return string.Join("\n", text
+            .Split('\n') // Split input into lines
+            .Select(line => Regex.Replace(line, $@"\s*({pattern}).*", string.Empty).TrimEnd())); // Remove comment & trailing spaces
+    }
+    
+
+    //TODO: try to implement without regex
+    public static string StripCommentsAlternative(string text, string[] commentSymbols)
+    {
+        return "";
+    }
+    
+    /// <summary>
+    /// https://www.codewars.com/kata/51ba717bb08c1cd60f00002f/train/csharp
+    ///
+    /// TODO: Check top solutions here: https://www.codewars.com/kata/51ba717bb08c1cd60f00002f/solutions/csharp
+    /// </summary>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    public static string Extract(int[] args)
+    {
+        if (args == null || args.Length == 0)
+            return "";
+
+        var result = new List<string>(); // Store the formatted numbers and ranges
+        var start = args[0];  // Start of a potential range
+        var end = args[0];    // End of the range
+
+        for (var i = 1; i < args.Length; i++)
+        {
+            if (args[i] != end + 1)
+            {
+                // We reached a break in the sequence, so process the previous range
+                result.Add(FormatSegment(start, end));
+                
+                // Start a new range with the current number
+                start = args[i];
+            }
+
+            end = args[i];
+        }
+
+        // Add the final range after the loop ends
+        result.Add(FormatSegment(start, end));
+
+        // Join everything with commas and return
+        return string.Join(",", result);
+    }
+    
+    private static string FormatSegment(int start, int end)
+    {
+        if (end - start >= 2)  
+            return $"{start}-{end}";  // Store as a range
+        else if (start == end)
+            return start.ToString();  // Store as a single number
+        else
+            return $"{start},{end}";  // Store as two separate numbers
+    }
+    
+    
+    
+    
 }
